@@ -24,12 +24,15 @@ public class RaceCarRunnable extends Car {
         return random.nextInt((getMaxSpeed() / 2) + 1) + getMaxSpeed() / 2;
     }
 
-    // Переопределение метода run() для выполнения в потоке
+    // Переопределение метода run()
     @Override
     public void run() {
         while (!isFinish) {
             int speed = getRandomSpeed();
-            passed += speed;
+            int timeInterval = 1000;
+
+            passed += (speed * timeInterval) / 1000; // расчет пройденной дистанции в метрах
+
             if (passed >= distance) {
                 passed = distance;
                 isFinish = true;
@@ -38,14 +41,14 @@ public class RaceCarRunnable extends Car {
             System.out.println(getCarInfo(speed, passed, distance));
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(timeInterval);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    // информация о состоянии машины
+    // Метод для формирования строки с информацией о состоянии машины
     private String getCarInfo(int speed, int progress, int totalDistance) {
         return getName() + " => speed: " + speed + "; progress: " + progress + "/" + totalDistance;
     }

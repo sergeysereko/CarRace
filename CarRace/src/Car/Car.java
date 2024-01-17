@@ -1,9 +1,9 @@
 package Car;
 
-public class Car implements Runnable{
-
+public class Car implements Runnable {
     private String name;
     private int maxSpeed;
+
 
     public Car(String name, int maxSpeed) {
         this.name = name;
@@ -20,7 +20,6 @@ public class Car implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("Car " + name + " is now running.");
-        System.out.println("Max Speed: " + maxSpeed + " km/h");
+        System.out.println("Car " + name + " is now running with max speed: " + maxSpeed + " km/h");
     }
 }
